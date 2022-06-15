@@ -1,0 +1,47 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                           http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+<changeSet id="1.0" author="maxryazan">
+    <createTable tableName="users">
+        <column name="id" type="bigint" autoIncrement="true">
+            <constraints nullable="true" primaryKey="true"/>
+        </column>
+        <column name="name" type="varchar(100)">
+            <constraints nullable="false"/>
+        </column>
+        <column name="last_name" type="varchar(100)">
+            <constraints nullable="false"/>
+        </column>
+        <column name="email" type="varchar(200)">
+            <constraints nullable="false" unique="true"/>
+        </column>
+        <column name="password" type="varchar(255)">
+            <constraints nullable="false"/>
+        </column>
+    </createTable>
+</changeSet>
+
+<changeSet id="1.1" author="maxryazan">
+        <insert tableName="users">
+            <column name="name" value="Maxim"/>
+            <column name="last_name" value="Volkov"/>
+            <column name="email" value="max@mail.ru"/>
+            <column name="password" value="$2a$12$rZwgR2iINPIyjjG/9yEkredz1VJfuSe0m4SSPiKt8xYHlODBFjYd."/>
+        </insert>
+        <insert tableName="users">
+            <column name="name" value="Igor"/>
+            <column name="last_name" value="Sidorov"/>
+            <column name="email" value="igor@mail.ru"/>
+            <column name="password" value="$2a$12$rZwgR2iINPIyjjG/9yEkredz1VJfuSe0m4SSPiKt8xYHlODBFjYd."/>
+        </insert>
+        <insert tableName="users">
+            <column name="name" value="Ivan"/>
+            <column name="last_name" value="Ivanov"/>
+            <column name="email" value="ivan@mail.ru"/>
+            <column name="password" value="$2a$12$rZwgR2iINPIyjjG/9yEkredz1VJfuSe0m4SSPiKt8xYHlODBFjYd."/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
