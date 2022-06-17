@@ -3,18 +3,18 @@ package com.example.resttest.controllers;
 
 import com.example.resttest.models.MyUser;
 import com.example.resttest.service.impl.MyUserServiceImpl;
-import org.aspectj.weaver.MethodDelegateTypeMunger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 
 
 @RequestMapping("/api")
 @RestController
+
 public class MyRestController {
     private final MyUserServiceImpl userService;
     @Autowired
