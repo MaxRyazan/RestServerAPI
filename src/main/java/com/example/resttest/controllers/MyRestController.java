@@ -10,8 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-
-
 @RequestMapping("/api")
 @RestController
 
@@ -22,12 +20,12 @@ public class MyRestController {
         this.userService = userService;
     }
 
-    @GetMapping("/all")
+    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> showAll() {
         return userService.showAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping( value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> showOneById(@PathVariable long id) {
         return userService.showOneUser(id);
     }
@@ -37,12 +35,12 @@ public class MyRestController {
      return userService.create(myUser);
     }
 
-    @PutMapping("/update")
+    @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateUser(@RequestBody MyUser myUser) {
       return  userService.update(myUser);
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping (value ="delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteUser(@PathVariable long id) {
         userService.delete(id);
     }
