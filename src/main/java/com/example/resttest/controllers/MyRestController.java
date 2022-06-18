@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/api")
 @RestController
-@Tag(name = "MyRestController", description = "can add, update, delete, show one and show all users")
+@Tag(name = "MyRestController", description = "Добавляем, обновляем, удаляем и просматриваем пользователей")
 public class MyRestController {
     private final MyUserServiceImpl userService;
     @Autowired
