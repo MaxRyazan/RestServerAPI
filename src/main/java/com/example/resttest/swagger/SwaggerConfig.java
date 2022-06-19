@@ -15,8 +15,9 @@ public class SwaggerConfig {
         return new OpenAPI()
                 .info(
                         new Info()
-                                .title("Example Swagger Api")
+                                .title("Rest API Server")
                                 .version("1.0.0")
+                                .termsOfService("https://github.com/MaxRyazan/RestTest")
                                 .contact(
                                         new Contact()
                                                 .email("no4ta87@mail.ru")

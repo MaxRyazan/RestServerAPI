@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 @RestController
 @Tag(name = "MyRestController", description = "Добавляем, обновляем, удаляем и просматриваем пользователей")
 public class MyRestController {
@@ -21,31 +21,31 @@ public class MyRestController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(description = "Показать всех пользователей")
     public ResponseEntity<?> showAll() {
         return userService.showAll();
     }
 
-    @GetMapping( value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping( value = "/users/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(description = "Показать одного пользователя по Id")
     public ResponseEntity<?> showOneById(@PathVariable long id) {
         return userService.showOneUser(id);
     }
 
-    @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(description = "Добавить нового пользователя")
     public ResponseEntity<?> addNewUser(@RequestBody MyUser myUser) {
      return userService.create(myUser);
     }
 
-    @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(description = "Изменить данные существующего пользователя")
     public ResponseEntity<?> updateUser(@RequestBody MyUser myUser) {
       return  userService.update(myUser);
     }
 
-    @DeleteMapping (value ="delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping (value ="/users/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(description = "Удалить пользователя")
     public void deleteUser(@PathVariable long id) {
         userService.delete(id);

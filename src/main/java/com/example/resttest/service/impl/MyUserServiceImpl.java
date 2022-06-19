@@ -27,7 +27,7 @@ public class MyUserServiceImpl implements MyUserService {
             new ResponseEntity<>(HttpStatus.NOT_FOUND);
             throw new NoDataException();
         }
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @Override
@@ -50,7 +50,8 @@ public class MyUserServiceImpl implements MyUserService {
                 new ResponseEntity<>(HttpStatus.NOT_FOUND);
                 throw  new UserNotFoundException();
             }
-      return  new ResponseEntity<>(userRepository.save(myUser), HttpStatus.OK);
+        userRepository.save(myUser);
+      return  new ResponseEntity<>(myUser, HttpStatus.OK);
     }
     @Override
     public ResponseEntity<?> update(MyUser myUser) {
