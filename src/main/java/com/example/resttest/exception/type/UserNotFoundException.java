@@ -6,7 +6,6 @@ public  class UserNotFoundException extends RuntimeException {
       super("User with id " + id + " not found!");
    }
 
-
    public UserNotFoundException() {
       super("Cannot create not valid user!");
    }

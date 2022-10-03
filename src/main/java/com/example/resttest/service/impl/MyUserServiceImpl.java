@@ -48,7 +48,7 @@ public class MyUserServiceImpl implements MyUserService {
                 throw  new UserNotFoundException();
             }
         userRepository.save(myUser);
-      return new ResponseEntity<>(myUser, HttpStatus.OK);
+      return new ResponseEntity<>(myUser, HttpStatus.CREATED);
     }
     @Override
     public ResponseEntity<MyUser> update(MyUser myUser) {
@@ -73,7 +73,7 @@ public class MyUserServiceImpl implements MyUserService {
         if(isNotExist(id)){
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

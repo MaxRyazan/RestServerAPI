@@ -23,7 +23,7 @@ public class AdviceController {
      Map<String, Object> body = new HashMap<>();
      body.put(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy / HH:mm:ss")), dataException.getMessage());
         return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
+                .status(HttpStatus.NO_CONTENT)
                 .body(body);
     }
 
