@@ -24,7 +24,6 @@ public class MyUserServiceImpl implements MyUserService {
     public ResponseEntity<List<MyUser>>  showAll() {
         List<MyUser> users = userRepository.findAll();
         if (users.isEmpty()) {
-            new ResponseEntity<>(HttpStatus.NOT_FOUND);
             throw new NoDataException();
         }
             return new ResponseEntity<>(users, HttpStatus.OK);
@@ -34,8 +33,7 @@ public class MyUserServiceImpl implements MyUserService {
     public ResponseEntity<MyUser> showOneUser(long id) {
         MyUser myUser =  userRepository.findById(id).orElse(null);
         if(myUser == null) {
-            new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            throw  new UserNotFoundException();
+            throw  new UserNotFoundException(id);
         }
         return new ResponseEntity<>(myUser, HttpStatus.OK);
     }
@@ -47,17 +45,15 @@ public class MyUserServiceImpl implements MyUserService {
                     (myUser.getLastName()==null) ||
                     (myUser.getEmail() == null) ||
                     (myUser.getPassword() == null))  {
-                new ResponseEntity<>(HttpStatus.NOT_FOUND);
                 throw  new UserNotFoundException();
             }
         userRepository.save(myUser);
-      return  new ResponseEntity<>(myUser, HttpStatus.OK);
+      return new ResponseEntity<>(myUser, HttpStatus.OK);
     }
     @Override
     public ResponseEntity<MyUser> update(MyUser myUser) {
         MyUser user = userRepository.findById(myUser.getId()).orElse(null);
         if(user == null) {
-            new ResponseEntity<>(HttpStatus.NOT_FOUND);
             throw  new UserNotFoundException();
         } else {
             user.setName(myUser.getName());
@@ -65,17 +61,23 @@ public class MyUserServiceImpl implements MyUserService {
             user.setEmail(myUser.getEmail());
             user.setPassword(myUser.getPassword());
             userRepository.save(user);
+            return new ResponseEntity<>(user, HttpStatus.OK);
         }
-        return new ResponseEntity<>(user, HttpStatus.OK);
     }
     @Override
-    public void delete(long id) {
-        MyUser userForDelete = userRepository.findById(id).orElse(null);
-        if(userForDelete == null) {
-            new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            throw  new UserNotFoundException();
-        } else {
-            userRepository.delete(userForDelete);
+    public ResponseEntity<MyUser> deleteById(long id) {
+        if(isNotExist(id)){
+            throw new UserNotFoundException();
         }
+        userRepository.deleteById(id);
+        if(isNotExist(id)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    public boolean isNotExist(long id){
+        return userRepository.findById(id).isEmpty();
     }
 }

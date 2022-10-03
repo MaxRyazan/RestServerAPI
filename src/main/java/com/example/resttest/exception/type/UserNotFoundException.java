@@ -1,13 +1,14 @@
 package com.example.resttest.exception.type;
 
 
-
 public  class UserNotFoundException extends RuntimeException {
    public UserNotFoundException(long id) {
-      super(String.format("User with Id %d not found", id));
+      super("User with id " + id + " not found!");
    }
+
+
    public UserNotFoundException() {
-      super("User with Id %d not found");
+      super("Cannot create not valid user!");
    }
 
 }

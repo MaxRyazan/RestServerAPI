@@ -49,7 +49,7 @@ public class MyRestController {
 
     @DeleteMapping (value ="/users/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(description = "Удалить пользователя")
-    public void deleteUser(@PathVariable long id) {
-        userService.delete(id);
+    public ResponseEntity<MyUser> deleteUser(@PathVariable long id) {
+       return userService.deleteById(id);
     }
 }

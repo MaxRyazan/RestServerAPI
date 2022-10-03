@@ -13,5 +13,5 @@ public interface MyUserService {
      ResponseEntity<MyUser> showOneUser(long id);
      ResponseEntity<MyUser> create(MyUser myUser);
      ResponseEntity<MyUser> update(MyUser myUser);
-     void delete(long id);
+     ResponseEntity<MyUser> deleteById(long id);
 }

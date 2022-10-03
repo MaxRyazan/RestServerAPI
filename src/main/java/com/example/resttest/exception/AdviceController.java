@@ -2,6 +2,7 @@ package com.example.resttest.exception;
 
 import com.example.resttest.exception.type.NoDataException;
 import com.example.resttest.exception.type.UserNotFoundException;
+import org.springdoc.api.ErrorMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,20 +16,23 @@ import java.util.Map;
 
 
 @RestControllerAdvice
-public class AdviceController extends ResponseEntityExceptionHandler {
+public class AdviceController {
 
     @ExceptionHandler(NoDataException.class)
-    public ResponseEntity<?> handleNoDataException() {
+    public ResponseEntity<?> handleNoDataException(NoDataException dataException) {
      Map<String, Object> body = new HashMap<>();
-     body.put("time",  LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy / HH:mm:ss")));
-     body.put("message", "DATA NOT FOUND");
-     return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+     body.put(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy / HH:mm:ss")), dataException.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(body);
     }
 
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<?> handleUserNotFoundException() {
+    public ResponseEntity<?> handleUserNotFoundException(UserNotFoundException exception) {
         Map<String, Object> body = new HashMap<>();
-        body.put(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy / HH:mm:ss")),  "USER NOT FOUND");
-        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+        body.put(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy / HH:mm:ss")), exception.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(body);
     }
 }
