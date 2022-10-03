@@ -21,7 +21,9 @@ public class AdviceController {
     @ExceptionHandler(NoDataException.class)
     public ResponseEntity<?> handleNoDataException(NoDataException dataException) {
      Map<String, Object> body = new HashMap<>();
-     body.put(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy / HH:mm:ss")), dataException.getMessage());
+     body.put(
+        LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy / HH:mm:ss")),
+        dataException.getMessage());
         return ResponseEntity
                 .status(HttpStatus.NO_CONTENT)
                 .body(body);
