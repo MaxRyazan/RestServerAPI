@@ -9,12 +9,9 @@ import java.util.List;
 @Service
 public interface MyUserService {
 
-     ResponseEntity<?> showAll();
-     ResponseEntity<?> showOneUser(long id);
-
-     ResponseEntity<?> create(MyUser myUser);
-
-     ResponseEntity<?> update(MyUser myUser);
-
+     ResponseEntity<List<MyUser>> showAll();
+     ResponseEntity<MyUser> showOneUser(long id);
+     ResponseEntity<MyUser> create(MyUser myUser);
+     ResponseEntity<MyUser> update(MyUser myUser);
      void delete(long id);
 }

@@ -21,7 +21,7 @@ public class MyUserServiceImpl implements MyUserService {
     }
 
     @Override
-    public ResponseEntity<?>  showAll() {
+    public ResponseEntity<List<MyUser>>  showAll() {
         List<MyUser> users = userRepository.findAll();
         if (users.isEmpty()) {
             new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -31,7 +31,7 @@ public class MyUserServiceImpl implements MyUserService {
     }
 
     @Override
-    public ResponseEntity<?> showOneUser(long id) {
+    public ResponseEntity<MyUser> showOneUser(long id) {
         MyUser myUser =  userRepository.findById(id).orElse(null);
         if(myUser == null) {
             new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -40,7 +40,7 @@ public class MyUserServiceImpl implements MyUserService {
         return new ResponseEntity<>(myUser, HttpStatus.OK);
     }
     @Override
-    public ResponseEntity<?> create(MyUser myUser) {
+    public ResponseEntity<MyUser> create(MyUser myUser) {
             if((myUser == null) ||
                     !(myUser.getId() > 0) ||
                     (myUser.getName() == null) ||
@@ -54,7 +54,7 @@ public class MyUserServiceImpl implements MyUserService {
       return  new ResponseEntity<>(myUser, HttpStatus.OK);
     }
     @Override
-    public ResponseEntity<?> update(MyUser myUser) {
+    public ResponseEntity<MyUser> update(MyUser myUser) {
         MyUser user = userRepository.findById(myUser.getId()).orElse(null);
         if(user == null) {
             new ResponseEntity<>(HttpStatus.NOT_FOUND);

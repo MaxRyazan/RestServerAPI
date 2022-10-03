@@ -10,6 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RequestMapping("/api/v1")
 @RestController
@@ -23,25 +25,25 @@ public class MyRestController {
 
     @GetMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(description = "Показать всех пользователей")
-    public ResponseEntity<?> showAll() {
+    public ResponseEntity<List<MyUser>> showAll() {
         return userService.showAll();
     }
 
     @GetMapping( value = "/users/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(description = "Показать одного пользователя по Id")
-    public ResponseEntity<?> showOneById(@PathVariable long id) {
+    public ResponseEntity<MyUser> showOneById(@PathVariable long id) {
         return userService.showOneUser(id);
     }
 
     @PostMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(description = "Добавить нового пользователя")
-    public ResponseEntity<?> addNewUser(@RequestBody MyUser myUser) {
+    public ResponseEntity<MyUser> addNewUser(@RequestBody MyUser myUser) {
      return userService.create(myUser);
     }
 
     @PutMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(description = "Изменить данные существующего пользователя")
-    public ResponseEntity<?> updateUser(@RequestBody MyUser myUser) {
+    public ResponseEntity<MyUser> updateUser(@RequestBody MyUser myUser) {
       return  userService.update(myUser);
     }
 
